@@ -1,0 +1,9 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Transaction Form 1
+    url: https://treasuryguild.github.io/treasury-v3/
+    about: Fill in this form when you make a transaction (Complete form 1 and 2)
+  - name: Transaction Form 2
+    url: https://github.com/treasuryguild/cardano-ambassadors/issues/new
+    about: Fill in this form after you made the transaction (Complete form 1 and 2)
+  
