@@ -1,7 +1,7 @@
 # cardano-ambassadors
 Cardano Ambassadors
 
- - [Transaction Forms](https://github.com/treasuryguild/cardano-ambassadors/issues/new/choose)
+ - [Treasury System v3](https://treasuryguild.github.io/treasury-v3/)
 
 Fund 7 Funded Proposals (Ideascale Links)
 
