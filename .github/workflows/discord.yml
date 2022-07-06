@@ -38,7 +38,7 @@ jobs:
        run: |
          echo "wallet=${{ steps.propdata.outputs.data }}" >> "$GITHUB_ENV"
      - name: Test Custom3
-       if: ${{ github.event.issue.labels[0].name == 'Incoming' }}
+       if: ${{ github.event.issue.labels.*.name == 'Incoming' }}
        uses: rjstone/discord-webhook-notify@v1
        with:
          severity: info
@@ -65,7 +65,7 @@ jobs:
          text: ${{ github.event.issue.title }}
          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
      - name: Test Custom4
-       if: ${{ github.event.issue.labels[0].name == 'Outgoing' }}
+       if: ${{ github.event.issue.labels.*.name == 'Outgoing' }}
        uses: rjstone/discord-webhook-notify@v1
        with:
          severity: info
