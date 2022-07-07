@@ -46,7 +46,7 @@ jobs:
          color: '#03fc2c'
          avatarUrl: https://github.com/treasuryguild/Treasury-Guild/raw/main/logo132.png
          description: |
-           `Payment Info - ${{ fromJSON(github.event.issue.body).project }} - ${{ fromJSON(github.event.issue.body).fund }}` - [Ideascale](${{ fromJSON(github.event.issue.body).ideascale }})
+           `${{ fromJSON(github.event.issue.body).project }} | ${{ fromJSON(github.event.issue.body).fund }} |` [Ideascale](${{ fromJSON(github.event.issue.body).ideascale }})
          details: | 
            ```fix
            ${{ fromJSON(github.event.issue.body).proposal }} | ${{ fromJSON(github.event.issue.body).budget }} | = ${{ fromJSON(github.event.issue.body).name }}
@@ -73,7 +73,7 @@ jobs:
          color: '#ff00aa'
          avatarUrl: https://github.com/treasuryguild/Treasury-Guild/raw/main/logo132.png
          description: |
-           `Payment Info - ${{ fromJSON(github.event.issue.body).project }} - ${{ fromJSON(github.event.issue.body).fund }}` - [Ideascale](${{ fromJSON(github.event.issue.body).ideascale }})
+           `${{ fromJSON(github.event.issue.body).project }} | ${{ fromJSON(github.event.issue.body).fund }} |` [Ideascale](${{ fromJSON(github.event.issue.body).ideascale }})
          details: | 
            ```fix
            ${{ fromJSON(github.event.issue.body).proposal }} | ${{ fromJSON(github.event.issue.body).budget }} | = ${{ fromJSON(github.event.issue.body).name }}
