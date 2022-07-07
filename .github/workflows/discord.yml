@@ -48,15 +48,14 @@ jobs:
          description: |
            `${{ fromJSON(github.event.issue.body).project }} | ${{ fromJSON(github.event.issue.body).fund }} |` [Ideascale](${{ fromJSON(github.event.issue.body).ideascale }})
          details: | 
+           `${{ fromJSON(github.event.issue.body).proposal }} | ${{ fromJSON(github.event.issue.body).budget }}`
            ```fix
-           ${{ fromJSON(github.event.issue.body).proposal }} | ${{ fromJSON(github.event.issue.body).budget }} | = ${{ fromJSON(github.event.issue.body).name }}
+           ${{ fromJSON(github.event.issue.body).description }}
            ```
            `Amount Received` - [CardanoScan](https://cardanoscan.io/transaction/${{ fromJSON(github.event.issue.body).txid }}) - [GitBook](https://treasury-guild.gitbook.io/cardano-ambassadors/)
            ```md
            * ADA - ${{ fromJSON(github.event.issue.body).ada }} 
            ```
-           `Description` - `${{ fromJSON(github.event.issue.body).description }}`
-           
            `Wallet Balance of` [${{ fromJSON(github.event.issue.body).proposal }}](https://pool.pm/${{ env.wallet }})
            ```css
            ${{ fromJSON(github.event.issue.body).wallet-balance[0] }} ${{ fromJSON(github.event.issue.body).wallet-balance[1] }} ${{ fromJSON(github.event.issue.body).wallet-balance[2] }}
@@ -75,15 +74,14 @@ jobs:
          description: |
            `${{ fromJSON(github.event.issue.body).project }} | ${{ fromJSON(github.event.issue.body).fund }} |` [Ideascale](${{ fromJSON(github.event.issue.body).ideascale }})
          details: | 
+           `${{ fromJSON(github.event.issue.body).proposal }} | ${{ fromJSON(github.event.issue.body).budget }}`
            ```fix
-           ${{ fromJSON(github.event.issue.body).proposal }} | ${{ fromJSON(github.event.issue.body).budget }} | = ${{ fromJSON(github.event.issue.body).name }}
+           ${{ fromJSON(github.event.issue.body).description }}
            ```
-           `Payment Amount` - [CardanoScan](https://cardanoscan.io/transaction/${{ fromJSON(github.event.issue.body).txid }}) - [GitBook](https://treasury-guild.gitbook.io/cardano-ambassadors/)
+           `Amount Paid` - [CardanoScan](https://cardanoscan.io/transaction/${{ fromJSON(github.event.issue.body).txid }}) - [GitBook](https://treasury-guild.gitbook.io/cardano-ambassadors/)
            ```md
            * ADA - ${{ fromJSON(github.event.issue.body).ada }} 
            ```
-           `Description` - `${{ fromJSON(github.event.issue.body).description }}`
-           
            `Wallet Balance of` [${{ fromJSON(github.event.issue.body).proposal }}](https://pool.pm/${{ env.wallet }})
            ```css
            ${{ fromJSON(github.event.issue.body).wallet-balance[0] }} ${{ fromJSON(github.event.issue.body).wallet-balance[1] }} ${{ fromJSON(github.event.issue.body).wallet-balance[2] }}
