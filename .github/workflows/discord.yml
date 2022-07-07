@@ -4,7 +4,8 @@ on:
     types: [closed]
   workflow_dispatch:
 env: 
-  fundR: ${{ fromJSON(github.event.issue.body).fund }}  
+  fundR: ${{ fromJSON(github.event.issue.body).fund }}
+  GitB: "cardano-ambassadors"
  # schedule:
     # run every 8 hours
   #  - cron:  '0 0,8,16 * * *'
@@ -52,7 +53,7 @@ jobs:
            ```fix
            ${{ fromJSON(github.event.issue.body).description }}
            ```
-           `Amount Received` - [CardanoScan](https://cardanoscan.io/transaction/${{ fromJSON(github.event.issue.body).txid }}) - [GitBook](https://treasury-guild.gitbook.io/cardano-ambassadors/)
+           `Amount Received` - [CardanoScan](https://cardanoscan.io/transaction/${{ fromJSON(github.event.issue.body).txid }}) - [GitBook](https://treasury-guild.gitbook.io/${{ env.GitB }}/)
            ```md
            * ADA - ${{ fromJSON(github.event.issue.body).ada }} 
            ```
@@ -78,7 +79,7 @@ jobs:
            ```fix
            ${{ fromJSON(github.event.issue.body).description }}
            ```
-           `Amount Paid` - [CardanoScan](https://cardanoscan.io/transaction/${{ fromJSON(github.event.issue.body).txid }}) - [GitBook](https://treasury-guild.gitbook.io/cardano-ambassadors/)
+           `Amount Paid` - [CardanoScan](https://cardanoscan.io/transaction/${{ fromJSON(github.event.issue.body).txid }}) - [GitBook](https://treasury-guild.gitbook.io/${{ env.GitB }}/)
            ```md
            * ADA - ${{ fromJSON(github.event.issue.body).ada }} 
            ```
