@@ -4,8 +4,9 @@ on:
     types: [closed]
   workflow_dispatch:
 env: 
-  fundR: ${{ fromJSON(github.event.issue.body).fund }}
+  fundR: ${{ fromJSON(github.event.issue.body).fund }} 
   GitB: "cardano-ambassadors"
+  gWallet: "Gimbal-Wallet"
  # schedule:
     # run every 8 hours
   #  - cron:  '0 0,8,16 * * *'
@@ -38,8 +39,64 @@ jobs:
      - name: Set env wallet
        run: |
          echo "wallet=${{ steps.propdata.outputs.data }}" >> "$GITHUB_ENV"
+     - name: Test Custom
+       if: ${{ ( contains(github.event.issue.labels.*.name, 'Incoming') && fromJSON(github.event.issue.body).proposal == env.gWallet) }}
+       uses: rjstone/discord-webhook-notify@v1
+       with:
+         severity: info
+         username: Treasury Guild
+         color: '#03fc2c'
+         avatarUrl: https://github.com/treasuryguild/Treasury-Guild/raw/main/logo132.png
+         description: |
+           `${{ fromJSON(github.event.issue.body).project }} | ${{ fromJSON(github.event.issue.body).fund }} |` [Ideascale](${{ fromJSON(github.event.issue.body).ideascale }})
+         details: | 
+           `${{ fromJSON(github.event.issue.body).proposal }} | ${{ fromJSON(github.event.issue.body).budget }}`
+           ```fix
+           ${{ fromJSON(github.event.issue.body).description }}
+           ```
+           `Amount Received` - [CardanoScan](https://cardanoscan.io/transaction/${{ fromJSON(github.event.issue.body).txid }}) - [GitBook](https://treasury-guild.gitbook.io/${{ env.GitB }}/)
+           ```md
+           * ADA - ${{ fromJSON(github.event.issue.body).ada }} 
+           * GMBL - ${{ fromJSON(github.event.issue.body).gmbl }}
+           * AGIX - ${{ fromJSON(github.event.issue.body).agix }}
+           ```
+           `Wallet Balance of` [${{ fromJSON(github.event.issue.body).proposal }}](https://pool.pm/${{ env.wallet }})
+           ```css
+           ${{ fromJSON(github.event.issue.body).wallet-balance[0] }} ${{ fromJSON(github.event.issue.body).wallet-balance[1] }} ${{ fromJSON(github.event.issue.body).wallet-balance[2] }}
+           ```    
+         footer: Exchange Rate - ${{ fromJSON(github.event.issue.body).exchange-rate }}
+         text: ${{ github.event.issue.title }}
+         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+     - name: Test Custom2
+       if: ${{ ( contains(github.event.issue.labels.*.name, 'Outgoing') && fromJSON(github.event.issue.body).proposal == env.gWallet) }}
+       uses: rjstone/discord-webhook-notify@v1
+       with:
+         severity: info
+         username: Treasury Guild
+         color: '#ff00aa'
+         avatarUrl: https://github.com/treasuryguild/Treasury-Guild/raw/main/logo132.png
+         description: |
+           `${{ fromJSON(github.event.issue.body).project }} | ${{ fromJSON(github.event.issue.body).fund }} |` [Ideascale](${{ fromJSON(github.event.issue.body).ideascale }})
+         details: | 
+           `${{ fromJSON(github.event.issue.body).proposal }} | ${{ fromJSON(github.event.issue.body).budget }}`
+           ```fix
+           ${{ fromJSON(github.event.issue.body).description }}
+           ```
+           `Amount Paid` - [CardanoScan](https://cardanoscan.io/transaction/${{ fromJSON(github.event.issue.body).txid }}) - [GitBook](https://treasury-guild.gitbook.io/${{ env.GitB }}/)
+           ```md
+           * ADA - ${{ fromJSON(github.event.issue.body).ada }} 
+           * GMBL - ${{ fromJSON(github.event.issue.body).gmbl }}
+           * AGIX - ${{ fromJSON(github.event.issue.body).agix }}
+           ```
+           `Wallet Balance of` [${{ fromJSON(github.event.issue.body).proposal }}](https://pool.pm/${{ env.wallet }})
+           ```css
+           ${{ fromJSON(github.event.issue.body).wallet-balance[0] }} ${{ fromJSON(github.event.issue.body).wallet-balance[1] }} ${{ fromJSON(github.event.issue.body).wallet-balance[2] }}
+           ```    
+         footer: Exchange Rate - ${{ fromJSON(github.event.issue.body).exchange-rate }}
+         text: ${{ github.event.issue.title }}
+         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
      - name: Test Custom3
-       if: ${{ contains(github.event.issue.labels.*.name, 'Incoming') }}
+       if: ${{ ( contains(github.event.issue.labels.*.name, 'Incoming') && fromJSON(github.event.issue.body).proposal != env.gWallet) }}
        uses: rjstone/discord-webhook-notify@v1
        with:
          severity: info
@@ -65,7 +122,7 @@ jobs:
          text: ${{ github.event.issue.title }}
          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
      - name: Test Custom4
-       if: ${{ contains(github.event.issue.labels.*.name, 'Outgoing') }}
+       if: ${{ ( contains(github.event.issue.labels.*.name, 'Outgoing') && fromJSON(github.event.issue.body).proposal != env.gWallet) }}
        uses: rjstone/discord-webhook-notify@v1
        with:
          severity: info
@@ -90,23 +147,3 @@ jobs:
          footer: Exchange Rate - ${{ fromJSON(github.event.issue.body).exchange-rate }}
          text: ${{ github.event.issue.title }}
          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
- # schedule:
-    # run every 8 hours
-  #  - cron:  '0 0,8,16 * * *'
-#jobs:
-#  issue:
-#    runs-on: ubuntu-latest
-#    name: discord
-#    steps:
-#     - name: Test Custom
-#       uses: rjstone/discord-webhook-notify@v1
-#       with:
-#         severity: info
-#         username: Treasury Guild
-#         color: '#ff00aa'
-#         avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
-#         description: "Payment Notification"
-#         details: ${{ github.event.issue.body }} https://treasury-guild.gitbook.io/cardano-ambassadors/
-#         footer: "View transaction in Gitbook link"
-#         text: ${{ github.event.issue.title }}
-#         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
